@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 export default function FilterPage() {
   const [earthquakes, setEarthquakes] = useState([]);
   const [country, setCountry] = useState("");
@@ -11,7 +12,8 @@ export default function FilterPage() {
 
   const fetchEarthquakes = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/earthquakes");
+      // const res = await fetch("http://localhost:3001/api/earthquakes");  
+      const res = await fetch(`${API_BASE_URL}/api/earthquakes`);
       let data = await res.json();
       setEarthquakes(data);
     } catch (err) {
@@ -20,7 +22,8 @@ export default function FilterPage() {
   };
 
   const applyFilter = () => {
-    fetch("http://localhost:3001/api/earthquakes")
+    // fetch("http://localhost:3001/api/earthquakes")
+       fetch(`${API_BASE_URL}/api/earthquakes`)
       .then((res) => res.json())
       .then((data) => {
         let filtered = data;

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 export default function MapPage() {
   const mapRef = useRef(null);
   const [earthquakes, setEarthquakes] = useState([]);
@@ -8,7 +9,8 @@ export default function MapPage() {
   useEffect(() => {
     const fetchEarthquakes = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/earthquakes");
+        // const res = await fetch("http://localhost:3001/api/earthquakes");
+        const res = await fetch(`${API_BASE_URL}/api/earthquakes`);
         const data = await res.json();
         setEarthquakes(data);
 

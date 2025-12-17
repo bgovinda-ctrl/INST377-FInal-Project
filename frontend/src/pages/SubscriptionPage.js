@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 export default function SubscriptionPage() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
@@ -13,7 +14,8 @@ export default function SubscriptionPage() {
     };
 
     try {
-      const res = await fetch("http://localhost:3001/api/subscriptions/subscribe", {
+      // const res = await fetch("http://localhost:3001/api/subscriptions/subscribe", {
+      const res = await fetch(`${API_BASE_URL}/api/subscriptions/subscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

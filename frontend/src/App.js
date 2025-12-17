@@ -13,7 +13,10 @@ function App() {
   // Fetch earthquake data
   const fetchEarthquakes = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/earthquakes");
+      // const res = await fetch("http://localhost:3001/api/earthquakes");
+      const API_BASE_URL = process.env.REACT_APP_API_URL;
+      const res = await fetch(`${API_BASE_URL}/api/earthquakes`);
+      
       const data = await res.json();
       setEarthquakes(data);
     } catch (err) {
