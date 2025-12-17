@@ -1,0 +1,196 @@
+/* === GENERAL LAYOUT === */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #e2e8f0; /* Light gray-blue background */
+  color: #333;
+}
+
+h1, h2, h3 {
+  color: #1e2a38;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* === NAVBAR === */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  background-color: #1e2a38;
+  padding: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+nav button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #4fa3ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  transition: 0.25s ease-in-out;
+}
+
+nav button:hover {
+  background-color: #1f7adb;
+  transform: translateY(-2px);
+}
+
+/* Active button */
+nav button.active {
+  background-color: #0d5cb6;
+}
+
+/* === PAGE CONTAINER === */
+.page-container {
+  max-width: 900px;
+  margin: auto;
+  background: #f7f9fc; /* Light gray-blue instead of white */
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* === MAP STYLING === */
+#map {
+  height: 500px;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* === EARTHQUAKE LIST === */
+ul {
+  list-style: none;
+  padding: 0;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+
+li {
+  background: #f7f9fc; /* Light gray-blue cards instead of white */
+  margin-bottom: 10px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: 0.2s;
+}
+
+li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* === FILTER FORM === */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.filters select,
+.filters button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+
+.filters button {
+  background-color: #4fa3ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.filters button:hover {
+  background-color: #1f7adb;
+  transform: translateY(-1px);
+}
+
+/* === SUBSCRIPTION FORM === */
+form {
+  max-width: 450px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f7f9fc; /* Light gray-blue background */
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+form button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+form button:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+/* === SUBSCRIPTION MESSAGES === */
+#message.success {
+  color: #28a745;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#message.error {
+  color: #dc3545;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  form {
+    width: 90%;
+  }
+}
