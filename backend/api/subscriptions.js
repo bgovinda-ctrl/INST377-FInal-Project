@@ -1,5 +1,5 @@
-// backend/api/subscriptions/subscribe.js
-import { supabase } from '../../../supabase/client.js'; // adjust path if needed
+// backend/api/subscriptions.js
+import { supabase } from '../supabase/client.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -7,7 +7,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Parse JSON body
     const body = await new Promise((resolve, reject) => {
       let data = '';
       req.on('data', chunk => data += chunk);
@@ -21,14 +20,11 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Email, location, and magnitude are required.' });
     }
 
-    // Insert into Supabase
     const { data, error } = await supabase
       .from('subscriptions')
       .insert([{ email, location, magnitude }]);
 
-    if (error) {
-      throw error;
-    }
+    if (error) throw error;
 
     res.status(200).json({
       message: 'Subscription saved successfully!',
@@ -36,10 +32,8 @@ export default async function handler(req, res) {
     });
 
   } catch (err) {
-    console.error('❌ Supabase insert error:', err);
-    res.status(500).json({
-      message: 'Failed to save subscription',
-      error: err.message
-    });
+    console.error(err);
+    res.status(500).json({ message: 'Failed to save subscription', error: err.message });
   }
 }
+

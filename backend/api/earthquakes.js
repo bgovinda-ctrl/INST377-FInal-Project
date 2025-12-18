@@ -1,5 +1,5 @@
 // backend/api/earthquakes.js
-export async function handler(req, res) {
+export default async function handler(req, res) {
   try {
     const response = await fetch(
       'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson'
@@ -27,4 +27,5 @@ export async function handler(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
+
 
