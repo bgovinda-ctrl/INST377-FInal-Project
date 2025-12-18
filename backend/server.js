@@ -6,7 +6,21 @@ const supabase = require('./supabase/client');
 const app = express();
 const PORT = 3001;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:5173",
+      "https://inst-377-final-project-geas-ver2.vercel.app",
+      "https://inst-377-final-project-geas-ver2-iulnnfc86.vercel.app",
+    ],
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
+// CRITICAL: allow preflight
+app.options("*", cors());
 app.use(express.json()); // <-- IMPORTANT: lets the backend read JSON bodies!
 
 // -------------------------------
