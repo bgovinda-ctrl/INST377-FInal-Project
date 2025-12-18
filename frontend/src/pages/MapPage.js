@@ -2,6 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+// Fix Leaflet default marker icons for production
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+});
+
 export default function MapPage() {
   const mapRef = useRef(null);
   const [earthquakes, setEarthquakes] = useState([]);
@@ -25,7 +36,7 @@ export default function MapPage() {
 
         const map = mapRef.current;
 
-        // Clear previous markers if any
+        // Remove old markers
         map.eachLayer((layer) => {
           if (layer instanceof L.Marker) {
             map.removeLayer(layer);
@@ -36,20 +47,19 @@ export default function MapPage() {
         const latLngs = [];
         data.forEach((eq) => {
           if (eq.latitude != null && eq.longitude != null) {
-            const marker = L.marker([eq.latitude, eq.longitude])
+            L.marker([eq.latitude, eq.longitude])
               .bindPopup(
-                `<strong>${eq.place}</strong><br>Magnitude: ${eq.magnitude.toFixed(
-                  2
-                )}<br>${new Date(eq.time).toLocaleString()}<br><a href="${
-                  eq.url
-                }" target="_blank">More info</a>`
+                `<strong>${eq.place}</strong><br>
+                 Magnitude: ${eq.magnitude.toFixed(2)}<br>
+                 ${new Date(eq.time).toLocaleString()}<br>
+                 <a href="${eq.url}" target="_blank">More info</a>`
               )
               .addTo(map);
             latLngs.push([eq.latitude, eq.longitude]);
           }
         });
 
-        // Fit map to show all markers
+        // Fit map to all markers
         if (latLngs.length > 0) {
           map.fitBounds(latLngs);
         }
