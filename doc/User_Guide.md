@@ -1,7 +1,6 @@
 # Global Earthquake Alert System  
 ## User Manual
 
----
 
 ## 1. Introduction
 
@@ -9,7 +8,7 @@ The **Global Earthquake Alert System** is a web-based application designed to he
 
 This user manual explains how to access, navigate, and use the system’s features without requiring any technical or programming background.
 
----
+
 
 ## 2. Intended Users
 
@@ -21,7 +20,7 @@ This application is intended for:
 
 No account creation or technical expertise is required to use the system.
 
----
+
 
 ## 3. Supported Platforms and Browsers
 
@@ -32,7 +31,7 @@ The Global Earthquake Alert System is a web application and can be accessed usin
 - Microsoft Edge
 
 
----
+
 
 ## 4. Accessing the Application
 
@@ -42,7 +41,7 @@ The Global Earthquake Alert System is a web application and can be accessed usin
 
 No login or registration is required to view earthquake data.
 
----
+
 
 ## 5. Application Features Overview
 
@@ -54,7 +53,7 @@ The Global Earthquake Alert System provides the following key features:
 - Subscription form for earthquake alerts
 - Filtering based on location and magnitude thresholds
 
----
+
 
 ## 6. Viewing Recent Earthquakes
 
@@ -66,7 +65,7 @@ Upon loading the application, users will see a list of recent earthquakes that i
 
 Earthquakes are updated automatically based on the latest data available from the USGS.
 
----
+
 
 ## 7. Interactive Map
 
@@ -82,7 +81,7 @@ The interactive map allows users to visually explore earthquake activity.
 
 Users can zoom in and out of the map and pan across different regions of the world.
 
----
+
 
 ## 8. Subscribing to Earthquake Alerts
 
@@ -98,7 +97,7 @@ The alert subscription feature allows users to receive notifications when earthq
 Once submitted, the system stores your alert preferences.
 
 
----
+
 
 ## 9. Understanding Alert Criteria
 
@@ -108,7 +107,7 @@ Alerts are triggered when:
 
 This helps users avoid unnecessary notifications while focusing on relevant seismic events.
 
----
+
 
 ## 10. Data Source and Accuracy
 
@@ -121,7 +120,6 @@ The data is:
 - Considered reliable for general awareness
 
 
----
 
 ## 11. Known Limitations
 
@@ -133,7 +131,7 @@ Users should be aware of the following limitations:
 - Internet connection is required
 - Data depends on availability of the USGS API
 
----
+
 
 ## 12. Best Practices for Users
 
@@ -142,7 +140,7 @@ Users should be aware of the following limitations:
 - Do not rely solely on this system for evacuation or emergency response
 - Regularly check the map for updated information
 
----
+
 
 ## 13. Troubleshooting
 
@@ -159,7 +157,7 @@ Users should be aware of the following limitations:
 - Ensure all fields are filled correctly
 - Use a valid email format
 
----
+
 
 
 ## 14. Conclusion
@@ -168,6 +166,6 @@ The Global Earthquake Alert System provides an easy-to-use interface for monitor
 
 For technical documentation or development details, please refer to the **Developer Manual**.
 
----
+
 
 **End of User Manual**
