@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL;
 export default function MapPage() {
   const mapRef = useRef(null);
   const [earthquakes, setEarthquakes] = useState([]);
@@ -9,40 +9,52 @@ export default function MapPage() {
   useEffect(() => {
     const fetchEarthquakes = async () => {
       try {
-        // const res = await fetch("http://localhost:3001/api/earthquakes");
-        const res = await fetch(`${API_BASE_URL}/api/earthquakes`);
+        const res = await fetch(
+          "https://inst-377-final-project-backend.vercel.app/api/earthquakes"
+        );
         const data = await res.json();
         setEarthquakes(data);
 
-        // If map already exists, remove it
-        if (mapRef.current) {
-          mapRef.current.remove();
+        // Initialize map only once
+        if (!mapRef.current) {
+          mapRef.current = L.map("map").setView([20, 0], 2);
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+          }).addTo(mapRef.current);
         }
 
-        // Initialize map
-        const map = L.map("map").setView([20, 0], 2);
-        mapRef.current = map;
+        const map = mapRef.current;
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "&copy; OpenStreetMap contributors",
-        }).addTo(map);
-
-        // Add markers
-        data.forEach((eq) => {
-          if (eq.coordinates && eq.coordinates.length >= 2) {
-            const lat = eq.coordinates[1];
-            const lon = eq.coordinates[0];
-            L.marker([lat, lon])
-              .bindPopup(
-                `${eq.place} — Magnitude: ${eq.magnitude} — ${new Date(
-                  eq.time
-                ).toLocaleString()}`
-              )
-              .addTo(map);
+        // Clear previous markers if any
+        map.eachLayer((layer) => {
+          if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
           }
         });
+
+        // Add markers using latitude & longitude
+        const latLngs = [];
+        data.forEach((eq) => {
+          if (eq.latitude != null && eq.longitude != null) {
+            const marker = L.marker([eq.latitude, eq.longitude])
+              .bindPopup(
+                `<strong>${eq.place}</strong><br>Magnitude: ${eq.magnitude.toFixed(
+                  2
+                )}<br>${new Date(eq.time).toLocaleString()}<br><a href="${
+                  eq.url
+                }" target="_blank">More info</a>`
+              )
+              .addTo(map);
+            latLngs.push([eq.latitude, eq.longitude]);
+          }
+        });
+
+        // Fit map to show all markers
+        if (latLngs.length > 0) {
+          map.fitBounds(latLngs);
+        }
       } catch (err) {
-        console.error(err);
+        console.error("Failed to fetch earthquakes:", err);
       }
     };
 
@@ -58,7 +70,7 @@ export default function MapPage() {
       <ul>
         {earthquakes.map((eq) => (
           <li key={eq.id}>
-            <strong>{eq.place}</strong> — Magnitude: {eq.magnitude} — Time:{" "}
+            <strong>{eq.place}</strong> — Magnitude: {eq.magnitude.toFixed(2)} —{" "}
             {new Date(eq.time).toLocaleString()}
           </li>
         ))}
@@ -66,6 +78,7 @@ export default function MapPage() {
     </div>
   );
 }
+
 
 
 
