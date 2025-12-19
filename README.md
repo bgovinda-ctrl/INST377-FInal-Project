@@ -67,5 +67,5 @@ Basic tests are available for API endpoints.
 - Improved geospatial filtering
 
 ### Documentation Location
-/doc
+/docs
 
