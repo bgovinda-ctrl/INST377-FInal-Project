@@ -47,11 +47,11 @@ Basic tests are available for API endpoints.
 <br> npm test
 
 ## API Documentation
-**Base Path: /api**
-**GET /earthquakes**
-**Description:** Fetches recent earthquake data from the USGS API and returns a normalized list
-**POST /subscriptions/subscribe**
-**Description:** Creates a new earthquake alert subscription.
+<br>**Base Path: /api**
+<br>**GET /earthquakes**
+<br>**Description:** Fetches recent earthquake data from the USGS API and returns a normalized list
+<br>**POST /subscriptions/subscribe**
+<br>**Description:** Creates a new earthquake alert subscription.
 
 ## Known Bugs & Limitations
 - 	No user authentication
