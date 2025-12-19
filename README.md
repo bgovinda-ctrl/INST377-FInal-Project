@@ -20,10 +20,10 @@ Clone Repository
 git clone [https://github.com:bgovinda-ctrl/INST377-FInal-Project.git](https://github.com/bgovinda-ctrl/INST377-FInal-Project)
 - cd global-earthquake-alert-system
 - Install Dependencies
-**Backend**
+- **Backend**
 - cd backend
 - npm install
-**Frontend**
+- **Frontend**
 - cd frontend
 - npm install
 
