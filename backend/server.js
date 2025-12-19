@@ -18,9 +18,18 @@ const corsOptions = {
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
 };
+
+// Apply CORS middleware globally
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // ensure OPTIONS preflight works
 app.use(express.json());
+
+// Explicitly handle OPTIONS preflight for all routes
+app.options("*", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.status(200).send(); // <- HTTP 200 is required for preflight
+});
 
 // ----------------- EARTHQUAKE API -----------------
 app.get("/api/earthquakes", async (req, res) => {
@@ -68,6 +77,11 @@ app.get("/api/earthquakes", async (req, res) => {
 
 // ----------------- SUBSCRIBE ENDPOINT -----------------
 app.post("/api/subscriptions/subscribe", async (req, res) => {
+  // CORS headers for POST too (in case preflight succeeded but POST fails)
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   const { email, location, magnitude } = req.body;
 
   if (!email || !location || magnitude == null) {
@@ -93,6 +107,7 @@ app.post("/api/subscriptions/subscribe", async (req, res) => {
 
 // ----------------- VERCEL EXPORT -----------------
 module.exports.handler = serverless(app);
+
 
 
 
