@@ -43,8 +43,8 @@ git clone [https://github.com:bgovinda-ctrl/INST377-FInal-Project.git](https://g
 Basic automated tests are available for backend API endpoints to validate request handling and response structure. These tests help ensure that core backend functionality continues to operate as expected during development.
 
 Basic tests are available for API endpoints.
-- cd backend
-- npm test
+<br> cd backend
+<br> npm test
 
 ## API Documentation
 **Base Path: /api**
