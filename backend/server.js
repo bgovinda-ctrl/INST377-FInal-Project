@@ -1,4 +1,4 @@
-// server.js — Vercel-ready with fixed CORS
+// server.js — Vercel-ready with dynamic preview URL CORS
 const express = require("express");
 const fetch = require("node-fetch");
 const supabase = require("./supabase/client");
@@ -6,22 +6,28 @@ const serverless = require("serverless-http");
 
 const app = express();
 
-// ----------------- CORS OPTIONS -----------------
+// ----------------- Allowed origins -----------------
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
-  "https://inst-377-final-project-geas-ver2.vercel.app",
-  "https://inst-377-final-project-geas-ver2-iulnnfc86.vercel.app",
 ];
 
-// ----------------- MIDDLEWARE -----------------
+// Helper to dynamically allow all Vercel preview URLs
+function isAllowedOrigin(origin) {
+  return (
+    allowedOrigins.includes(origin) ||
+    (origin && origin.endsWith(".vercel.app"))
+  );
+}
+
+// ----------------- Middleware -----------------
 app.use(express.json());
 
 // Preflight handler — must run first for serverless
 app.all("*", (req, res, next) => {
   if (req.method === "OPTIONS") {
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
+    if (isAllowedOrigin(origin)) {
       res.setHeader("Access-Control-Allow-Origin", origin);
       res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -31,10 +37,10 @@ app.all("*", (req, res, next) => {
   next();
 });
 
-// CORS headers for all other requests
+// Set CORS headers on all other requests
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+  if (isAllowedOrigin(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
   next();
@@ -87,7 +93,7 @@ app.get("/api/earthquakes", async (req, res) => {
 // ----------------- SUBSCRIBE ENDPOINT -----------------
 app.post("/api/subscriptions/subscribe", async (req, res) => {
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+  if (isAllowedOrigin(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
