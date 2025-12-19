@@ -1,34 +1,43 @@
-// server.js — Vercel-ready
+// server.js — Vercel-ready with fixed CORS
 const express = require("express");
 const fetch = require("node-fetch");
-const cors = require("cors");
 const supabase = require("./supabase/client");
 const serverless = require("serverless-http");
 
 const app = express();
 
-// ----------------- CORS -----------------
-const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "https://inst-377-final-project-geas-ver2.vercel.app",
-    "https://inst-377-final-project-geas-ver2-iulnnfc86.vercel.app",
-  ],
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
-};
+// ----------------- CORS OPTIONS -----------------
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://inst-377-final-project-geas-ver2.vercel.app",
+  "https://inst-377-final-project-geas-ver2-iulnnfc86.vercel.app",
+];
 
-// Apply CORS middleware globally
-app.use(cors(corsOptions));
+// ----------------- MIDDLEWARE -----------------
 app.use(express.json());
 
-// Explicitly handle OPTIONS preflight for all routes
-app.options("*", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.status(200).send(); // <- HTTP 200 is required for preflight
+// Preflight handler — must run first for serverless
+app.all("*", (req, res, next) => {
+  if (req.method === "OPTIONS") {
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    }
+    return res.status(200).send("OK"); // <- critical for preflight
+  }
+  next();
+});
+
+// CORS headers for all other requests
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  next();
 });
 
 // ----------------- EARTHQUAKE API -----------------
@@ -77,8 +86,10 @@ app.get("/api/earthquakes", async (req, res) => {
 
 // ----------------- SUBSCRIBE ENDPOINT -----------------
 app.post("/api/subscriptions/subscribe", async (req, res) => {
-  // CORS headers for POST too (in case preflight succeeded but POST fails)
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
@@ -97,7 +108,6 @@ app.post("/api/subscriptions/subscribe", async (req, res) => {
     if (error) throw error;
 
     console.log("📩 New subscription saved to Supabase:", data[0]);
-
     res.json({ message: "Subscription saved successfully!", subscription: data[0] });
   } catch (err) {
     console.error("Supabase insert error:", err);
@@ -107,9 +117,3 @@ app.post("/api/subscriptions/subscribe", async (req, res) => {
 
 // ----------------- VERCEL EXPORT -----------------
 module.exports.handler = serverless(app);
-
-
-
-
-
-
