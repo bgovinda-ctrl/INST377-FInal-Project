@@ -8,7 +8,7 @@ The Global Earthquake Alert System is a full-stack web application designed to p
 Google Chrome
 Microsoft Edge
 ## Links
-- [Developer Manual](https://github.com/jremeto/Group7-Final-INST377/blob/main/README.md)
+- [Developer Manual](https://github.com/bgovinda-ctrl/INST377-FInal-Project/blob/main/README.md)
 # Developer Manual
 ## Installation & Setup
 Prerequisites
