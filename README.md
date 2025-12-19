@@ -21,8 +21,8 @@ git clone [https://github.com:bgovinda-ctrl/INST377-FInal-Project.git](https://g
 - cd global-earthquake-alert-system
 - Install Dependencies
 - **Backend**
--- cd backend
--- npm install
+&emsp cd backend
+&emsp npm install
 - **Frontend**
 - cd frontend
 - npm install
