@@ -6,7 +6,7 @@ The Global Earthquake Alert System is a full-stack web application designed to p
 https://inst-377-final-project-geas-ver2.vercel.app/
 ## Target Browsers
 Google Chrome
-Microsoft Edge
+<br>Microsoft Edge
 ## Links
 - [Developer Manual](https://github.com/bgovinda-ctrl/INST377-FInal-Project/blob/main/README.md)
 - [User Manual](https://github.com/bgovinda-ctrl/INST377-FInal-Project/blob/main/doc/User_Guide.md)
@@ -24,8 +24,8 @@ git clone [https://github.com:bgovinda-ctrl/INST377-FInal-Project.git](https://g
 <br>&emsp; cd backend
 <br>&emsp; npm install
 - **Frontend**
-- cd frontend
-- npm install
+<br>&emsp; cd frontend
+<br>&emsp; npm install
 
 ## Running the Application
 **Start Backend Server**
