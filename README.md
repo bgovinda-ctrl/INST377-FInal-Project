@@ -21,21 +21,21 @@ git clone [https://github.com:bgovinda-ctrl/INST377-FInal-Project.git](https://g
 - cd global-earthquake-alert-system
 - Install Dependencies
 **Backend**
-cd backend
-npm install
+- cd backend
+- npm install
 **Frontend**
-cd frontend
-npm install
+- cd frontend
+- npm install
 
 ## Running the Application
 **Start Backend Server**
-cd backend
-npm start
+- cd backend
+- npm start
 **Backend runs at:**
 http://localhost:3001
 **Start Frontend Server**
-cd frontend
-npm start
+- cd frontend
+- npm start
 **Frontend runs at:**
 http://localhost:3000
 
@@ -43,8 +43,8 @@ http://localhost:3000
 Basic automated tests are available for backend API endpoints to validate request handling and response structure. These tests help ensure that core backend functionality continues to operate as expected during development.
 
 Basic tests are available for API endpoints.
-cd backend
-npm test
+- cd backend
+- npm test
 
 ## API Documentation
 **Base Path: /api**
