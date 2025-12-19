@@ -9,7 +9,7 @@ Google Chrome
 <br>Microsoft Edge
 ## Links
 - [Developer Manual](https://github.com/bgovinda-ctrl/INST377-FInal-Project/blob/main/README.md)
-- [User Manual](https://github.com/bgovinda-ctrl/INST377-FInal-Project/blob/main/doc/User_Guide.md)
+- [User Manual](https://github.com/bgovinda-ctrl/INST377-FInal-Project/blob/main/docs/User_Guide.md)
 # Developer Manual
 ## Installation & Setup
 Prerequisites
