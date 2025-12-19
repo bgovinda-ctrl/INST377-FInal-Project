@@ -1,28 +1,31 @@
-// server.js — Vercel-ready
 const express = require("express");
 const fetch = require("node-fetch");
 const cors = require("cors");
-const supabase = require("./supabase/client");
-const serverless = require("serverless-http");
+const supabase = require('./supabase/client');
 
 const app = express();
+const PORT = 3001;
 
-// ----------------- CORS -----------------
-const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "https://inst-377-final-project-geas-ver2.vercel.app",
-    "https://inst-377-final-project-geas-ver2-iulnnfc86.vercel.app",
-  ],
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
-};
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // ensure OPTIONS preflight works
-app.use(express.json());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:5173",
+      "https://inst-377-final-project-geas-ver2.vercel.app",
+      "https://inst-377-final-project-geas-ver2-iulnnfc86.vercel.app",
+    ],
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
-// ----------------- EARTHQUAKE API -----------------
+// CRITICAL: allow preflight
+app.options("*", cors());
+app.use(express.json()); // <-- IMPORTANT: lets the backend read JSON bodies!
+
+// -------------------------------
+// EARTHQUAKE API (your existing code)
+// -------------------------------
 app.get("/api/earthquakes", async (req, res) => {
   try {
     const currentYear = new Date().getFullYear();
@@ -36,6 +39,10 @@ app.get("/api/earthquakes", async (req, res) => {
           : `${year}-12-31`;
 
       const url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${startTime}&endtime=${endTime}&minmagnitude=3&limit=1000`;
+
+      console.log(
+        `Fetching earthquakes: ${startTime} to ${endTime} (magnitude ≥ 3, max 1000)`
+      );
 
       const response = await fetch(url);
       const data = await response.json();
@@ -54,6 +61,7 @@ app.get("/api/earthquakes", async (req, res) => {
       allEarthquakes = allEarthquakes.concat(earthquakes);
     }
 
+    // Keep only top 300 strongest earthquakes
     allEarthquakes = allEarthquakes
       .filter((eq) => eq.magnitude !== null)
       .sort((a, b) => b.magnitude - a.magnitude)
@@ -66,7 +74,9 @@ app.get("/api/earthquakes", async (req, res) => {
   }
 });
 
-// ----------------- SUBSCRIBE ENDPOINT -----------------
+// -------------------------------
+// ADD THIS — SUBSCRIBE ENDPOINT
+// -------------------------------
 app.post("/api/subscriptions/subscribe", async (req, res) => {
   const { email, location, magnitude } = req.body;
 
@@ -76,9 +86,9 @@ app.post("/api/subscriptions/subscribe", async (req, res) => {
 
   try {
     const { data, error } = await supabase
-      .from("subscriptions")
+      .from('subscriptions')
       .insert([{ email, location, magnitude }])
-      .select();
+      .select(); // fetch inserted row
 
     if (error) throw error;
 
@@ -91,8 +101,8 @@ app.post("/api/subscriptions/subscribe", async (req, res) => {
   }
 });
 
-// ----------------- VERCEL EXPORT -----------------
-module.exports.handler = serverless(app);
+// -------------------------------
+
 
 
 
