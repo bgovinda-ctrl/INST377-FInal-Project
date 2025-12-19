@@ -3,7 +3,7 @@
 The Global Earthquake Alert System is a full-stack web application designed to provide real-time earthquake information and alert subscriptions for users worldwide. The system retrieves live seismic data from the United States Geological Survey (USGS) Earthquake API, processes and normalizes the data through a backend REST API, and presents it through an intuitive web interface. Users can view recent earthquake events and subscribe to alerts based on location and magnitude thresholds. The goal of this project is to increase awareness of seismic activity and provide a foundation for scalable alerting and visualization features.This project follows a modern web architecture using a React frontend, a Node.js and Express backend, and Supabase for managing user subscription data. The application is deployed on Vercel, enabling serverless backend functions and fast frontend delivery.
  
 ## Link to Global Earthquake Alert System in Vercel
-[https://inst-377-final-project-geas-ver2-5zqj0id6u.vercel.app/] (https://inst-377-final-project-geas-ver2-5zqj0id6u.vercel.app/)
+https://inst-377-final-project-geas-ver2-5zqj0id6u.vercel.app/
 ## Target Browsers
 Google Chrome
 Microsoft Edge
