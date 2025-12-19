@@ -28,12 +28,12 @@ git clone [https://github.com:bgovinda-ctrl/INST377-FInal-Project.git](https://g
 <br>&emsp; npm install
 
 ## Running the Application
-<br>**Start Backend Server**
+<br>**Start Backend Server**<br>
 <br> cd backend
 <br> npm start
-<br>**Backend runs at:**
+<br>**Backend runs at:**<br>
 <br>http://localhost:3001
-<br>**Start Frontend Server**
+<br>**Start Frontend Server**<br>
 <br> cd frontend
 <br> npm start
 <br>**Frontend runs at:**
