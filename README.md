@@ -29,15 +29,15 @@ git clone [https://github.com:bgovinda-ctrl/INST377-FInal-Project.git](https://g
 
 ## Running the Application
 **Start Backend Server**
-- cd backend
-- npm start
+<br> cd backend
+<br> npm start
 **Backend runs at:**
-http://localhost:3001
+<br>http://localhost:3001
 **Start Frontend Server**
-- cd frontend
-- npm start
+<br> cd frontend
+<br> npm start
 **Frontend runs at:**
-http://localhost:3000
+<br>http://localhost:3000
 
 ## Running Tests
 Basic automated tests are available for backend API endpoints to validate request handling and response structure. These tests help ensure that core backend functionality continues to operate as expected during development.
