@@ -16,7 +16,7 @@ Prerequisites
 - npm or yarn		
 - Git
 Clone Repository
-git clone (git@github.com:bgovinda-ctrl/INST377-FInal-Project.git)
+git clone https://github.com:bgovinda-ctrl/INST377-FInal-Project.git
 cd global-earthquake-alert-system
 Install Dependencies
 **Backend**
