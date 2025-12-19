@@ -2,13 +2,14 @@
 ## Description
 The Global Earthquake Alert System is a full-stack web application designed to provide real-time earthquake information and alert subscriptions for users worldwide. The system retrieves live seismic data from the United States Geological Survey (USGS) Earthquake API, processes and normalizes the data through a backend REST API, and presents it through an intuitive web interface. Users can view recent earthquake events and subscribe to alerts based on location and magnitude thresholds. The goal of this project is to increase awareness of seismic activity and provide a foundation for scalable alerting and visualization features.This project follows a modern web architecture using a React frontend, a Node.js and Express backend, and Supabase for managing user subscription data. The application is deployed on Vercel, enabling serverless backend functions and fast frontend delivery.
  
-## Link to Vercel
-
+## Link to Global Earthquake Alert System in Vercel
+https://inst-377-final-project-geas-ver2.vercel.app/
 ## Target Browsers
 Google Chrome
-Microsoft Edge
+<br>Microsoft Edge
 ## Links
-- [Developer Manual](https://github.com/jremeto/Group7-Final-INST377/blob/main/README.md)
+- [Developer Manual](https://github.com/bgovinda-ctrl/INST377-FInal-Project/blob/main/README.md)
+- [User Manual](https://github.com/bgovinda-ctrl/INST377-FInal-Project/blob/main/doc/User_Guide.md)
 # Developer Manual
 ## Installation & Setup
 Prerequisites
@@ -16,41 +17,41 @@ Prerequisites
 - npm or yarn		
 - Git
 Clone Repository
-git clone https://github.com/your-org/global-earthquake-alert-system.git
-cd global-earthquake-alert-system
-Install Dependencies
-**Backend**
-cd backend
-npm install
-**Frontend**
-cd frontend
-npm install
+git clone [https://github.com:bgovinda-ctrl/INST377-FInal-Project.git](https://github.com/bgovinda-ctrl/INST377-FInal-Project)
+- cd global-earthquake-alert-system
+- Install Dependencies
+- **Backend**
+<br>&emsp; cd backend
+<br>&emsp; npm install
+- **Frontend**
+<br>&emsp; cd frontend
+<br>&emsp; npm install
 
 ## Running the Application
 **Start Backend Server**
-cd backend
-npm start
-**Backend runs at:**
-http://localhost:3001
-**Start Frontend Server**
-cd frontend
-npm start
-**Frontend runs at:**
-http://localhost:3000
+<br> cd backend
+<br> npm start
+<br>**Backend runs at:**
+<br>http://localhost:3001<br>
+<br>**Start Frontend Server**
+<br> cd frontend
+<br> npm start
+<br>**Frontend runs at:**
+<br>http://localhost:3000
 
 ## Running Tests
 Basic automated tests are available for backend API endpoints to validate request handling and response structure. These tests help ensure that core backend functionality continues to operate as expected during development.
 
 Basic tests are available for API endpoints.
-cd backend
-npm test
+<br> cd backend
+<br> npm test
 
 ## API Documentation
-**Base Path: /api**
-**GET /earthquakes**
-**Description:** Fetches recent earthquake data from the USGS API and returns a normalized list
-**POST /subscriptions/subscribe**
-**Description:** Creates a new earthquake alert subscription.
+<br>**Base Path: /api**
+<br>**GET /earthquakes**
+<br>**Description:** Fetches recent earthquake data from the USGS API and returns a normalized list
+<br>**POST /subscriptions/subscribe**
+<br>**Description:** Creates a new earthquake alert subscription.
 
 ## Known Bugs & Limitations
 - 	No user authentication
@@ -66,5 +67,5 @@ npm test
 - Improved geospatial filtering
 
 ### Documentation Location
-/docs
+/doc
 
